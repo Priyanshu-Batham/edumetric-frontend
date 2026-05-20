@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: #12151e; }
+::-webkit-scrollbar-thumb { background: #374060; border-radius: 3px; }
+
+/* Recharts tooltip override — must be global */
+.recharts-tooltip-wrapper { outline: none !important; }
