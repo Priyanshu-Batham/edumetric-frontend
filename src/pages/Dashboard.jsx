@@ -25,6 +25,23 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col gap-7 animate-fade-up">
+      {/* ── CGPA Note ───────────────────────────────────── */}
+      <Card>
+        <div className="flex items-start gap-3">
+          <div className="text-accent text-lg">ℹ️</div>
+
+          <div>
+            <p className="font-display font-semibold text-sm text-txt mb-1">
+              Note
+            </p>
+
+            <p className="text-sm text-txt-2 leading-relaxed">
+              CGPA in this platform is calculated as the average of SGPA,
+              not the actual credit based formula.
+            </p>
+          </div>
+        </div>
+      </Card>
 
       {/* ── KPI row ─────────────────────────────────────── */}
       <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-4">
