@@ -170,7 +170,7 @@ export default function Students() {
   ];
 
   return (
-    <div className="flex flex-col gap-5 animate-fade-up">
+    <div className="flex flex-col gap-5">
       <SectionHeader title="Students" subtitle={`${students?.length ?? 0} records`} />
 
       {/* Filters */}

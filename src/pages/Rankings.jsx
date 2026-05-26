@@ -235,7 +235,7 @@ export default function Rankings() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 animate-fade-up">
+    <div className="flex flex-col gap-6">
       <SectionHeader title="Rankings" subtitle="Performance leaderboards and rank lookup" />
       <Tabs tabs={tabs} active={tab} onChange={setTab} />
       <div>

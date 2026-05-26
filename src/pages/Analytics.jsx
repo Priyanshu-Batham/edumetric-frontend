@@ -346,7 +346,7 @@ export default function Analytics() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 animate-fade-up">
+    <div className="flex flex-col gap-6">
       <SectionHeader title="Analytics" subtitle="Deep dive into exam performance data" />
       <Tabs tabs={tabs} active={tab} onChange={setTab} />
       <div>

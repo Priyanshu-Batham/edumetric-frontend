@@ -108,7 +108,7 @@ export default function Subjects() {
   ];
 
   return (
-    <div className="flex flex-col gap-5 animate-fade-up">
+    <div className="flex flex-col gap-5">
       <SectionHeader title="Subjects" subtitle={`${subjects?.length ?? 0} subjects`} />
 
       <div className="max-w-sm">

@@ -155,7 +155,7 @@ export default function ExamSessions() {
   ];
 
   return (
-    <div className="flex flex-col gap-5 animate-fade-up">
+    <div className="flex flex-col gap-5">
       <SectionHeader title="Exam Sessions" subtitle={`${sessions?.length ?? 0} sessions`} />
 
       {/* Summary KPIs */}
