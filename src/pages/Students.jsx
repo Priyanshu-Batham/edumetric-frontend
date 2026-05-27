@@ -170,11 +170,7 @@ export default function Students() {
   ];
 
   return (
-<<<<<<< HEAD
     <div className="flex flex-col">
-=======
-    <div className="flex flex-col gap-5">
->>>>>>> f191a61a8c32d72267da551d10031902b7070b83
       <SectionHeader title="Students" subtitle={`${students?.length ?? 0} records`} />
 
       {/* Filters */}

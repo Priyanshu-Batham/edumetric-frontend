@@ -19,7 +19,7 @@ export default function Layout({ children }) {
   const [collapsed, setCollapsed]   = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
-  const pageTitle = NAV.find(n => n.path === location.pathname)?.label || 'EduMetrics';
+  const pageTitle = NAV.find(n => n.path === location.pathname)?.label || 'NPGCranks';
 
   // Close mobile drawer on nav
   const handleNavClick = () => setMobileOpen(false);
@@ -51,12 +51,12 @@ export default function Layout({ children }) {
         {/* Logo */}
         <div className="flex items-center gap-3 h-16 px-5 border-b border-border shrink-0">
           <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center font-display font-extrabold text-base text-bg shrink-0">
-            E
+            N
           </div>
           <div className={clsx('overflow-hidden transition-all duration-300',
             collapsed && !mobileOpen ? 'lg:w-0 lg:opacity-0' : 'w-auto opacity-100'
           )}>
-            <div className="font-display font-bold text-base leading-tight text-txt whitespace-nowrap">EduMetrics</div>
+            <div className="font-display font-bold text-base leading-tight text-txt whitespace-nowrap">NPGC Ranks</div>
             <div className="font-mono text-[9px] text-txt-3 tracking-[0.12em] uppercase whitespace-nowrap">Exam Analytics</div>
           </div>
         </div>
