@@ -27,7 +27,7 @@ function PerformanceModal({ student, onClose }) {
         <div className="flex flex-col gap-5">
 
           {/* Summary stats */}
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard label="CGPA"      value={data.summary?.cgpa}            color="accent" />
             <StatCard label="Semesters" value={data.summary?.total_semesters} color="accent-2" />
             <StatCard label="Pass"      value={data.summary?.pass_count}      color="emerald" />
@@ -170,13 +170,13 @@ export default function Students() {
   ];
 
   return (
-    <div className="flex flex-col gap-5 animate-fade-up">
+    <div className="flex flex-col">
       <SectionHeader title="Students" subtitle={`${students?.length ?? 0} records`} />
 
       {/* Filters */}
-      <div className="flex gap-3 flex-wrap">
+      <div className="flex flex-col sm:flex-row gap-3">
         <SearchInput value={search} onChange={setSearch} placeholder="Search by name…" />
-        <div className="w-52">
+        <div className="sm:w-52 shrink-0">
           <Select
             value={courseFilter}
             onChange={setCourse}
@@ -187,7 +187,7 @@ export default function Students() {
         {(search || courseFilter) && (
           <button
             onClick={() => { setSearch(''); setCourse(''); }}
-            className="px-3 py-2 text-xs text-txt-3 border border-border rounded-lg hover:text-txt hover:border-border-2 transition-colors"
+            className="px-3 py-2.5 text-xs text-txt-3 border border-border rounded-lg hover:text-txt hover:border-border-2 transition-colors self-start sm:self-end"
           >
             Clear
           </button>

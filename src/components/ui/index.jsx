@@ -13,7 +13,7 @@ export function Spinner({ className }) {
 // ── Loading ────────────────────────────────────────────────────────────
 export function Loading({ text = 'Loading...' }) {
   return (
-    <div className="flex items-center gap-3 px-6 py-12 text-txt-2">
+    <div className="flex items-center gap-3 px-4 py-10 text-txt-2">
       <Spinner />
       <span className="font-mono text-xs tracking-wide">{text}</span>
     </div>
@@ -23,7 +23,7 @@ export function Loading({ text = 'Loading...' }) {
 // ── ErrorState ─────────────────────────────────────────────────────────
 export function ErrorState({ message }) {
   return (
-    <div className="px-5 py-4 rounded-xl bg-crimson/10 border border-crimson text-crimson font-mono text-xs">
+    <div className="px-4 py-3 rounded-xl bg-crimson/10 border border-crimson text-crimson font-mono text-xs">
       ⚠ {message}
     </div>
   );
@@ -32,9 +32,9 @@ export function ErrorState({ message }) {
 // ── EmptyState ─────────────────────────────────────────────────────────
 export function EmptyState({ icon, title, subtitle }) {
   return (
-    <div className="flex flex-col items-center justify-center py-16 px-6 text-center text-txt-3">
+    <div className="flex flex-col items-center justify-center py-12 px-4 text-center text-txt-3">
       <div className="text-4xl mb-3">{icon || '∅'}</div>
-      <div className="font-display text-lg text-txt-2 mb-1">{title}</div>
+      <div className="font-display text-base text-txt-2 mb-1">{title}</div>
       {subtitle && <div className="text-xs">{subtitle}</div>}
     </div>
   );
@@ -46,7 +46,7 @@ export function Card({ children, className, onClick }) {
     <div
       onClick={onClick}
       className={clsx(
-        'bg-surface border border-border rounded-xl p-5 shadow-lg',
+        'bg-surface border border-border rounded-xl p-4 sm:p-5 shadow-lg',
         onClick && 'cursor-pointer hover:border-accent transition-colors duration-200',
         className
       )}
@@ -74,11 +74,11 @@ const STAT_TEXT = {
 
 export function StatCard({ label, value, sub, icon, color = 'accent' }) {
   return (
-    <div className="relative bg-surface border border-border rounded-xl p-5 flex flex-col gap-1 overflow-hidden shadow-lg">
+    <div className="relative bg-surface border border-border rounded-xl p-4 sm:p-5 flex flex-col gap-1 overflow-hidden shadow-lg">
       <div className={clsx('absolute top-0 left-0 right-0 h-0.5', STAT_ACCENTS[color] || 'bg-accent')} />
-      {icon && <div className="text-2xl mb-1">{icon}</div>}
-      <div className="font-mono text-[10px] text-txt-3 tracking-widest uppercase">{label}</div>
-      <div className={clsx('font-display text-3xl font-bold leading-none', STAT_TEXT[color] || 'text-accent')}>
+      {icon && <div className="text-xl sm:text-2xl mb-1">{icon}</div>}
+      <div className="font-mono text-[9px] sm:text-[10px] text-txt-3 tracking-widest uppercase">{label}</div>
+      <div className={clsx('font-display text-2xl sm:text-3xl font-bold leading-none', STAT_TEXT[color] || 'text-accent')}>
         {value ?? '—'}
       </div>
       {sub && <div className="text-xs text-txt-3">{sub}</div>}
@@ -99,7 +99,7 @@ const BADGE_STYLES = {
 export function Badge({ children, color = 'gray' }) {
   return (
     <span className={clsx(
-      'inline-block px-2.5 py-0.5 rounded-full font-mono text-[10px] font-medium tracking-wider uppercase',
+      'inline-block px-2 py-0.5 rounded-full font-mono text-[10px] font-medium tracking-wider uppercase',
       BADGE_STYLES[color] || BADGE_STYLES.gray
     )}>
       {children}
@@ -141,7 +141,7 @@ export function Button({ children, onClick, variant = 'primary', size = 'md', di
 // ── Select ─────────────────────────────────────────────────────────────
 export function Select({ label, value, onChange, options, placeholder = 'Select…' }) {
   return (
-    <div className="flex flex-col gap-1.5">
+    <div className="flex flex-col gap-1.5 w-full">
       {label && (
         <label className="font-mono text-[10px] text-txt-2 tracking-widest uppercase">
           {label}
@@ -150,7 +150,7 @@ export function Select({ label, value, onChange, options, placeholder = 'Select�
       <select
         value={value}
         onChange={e => onChange(e.target.value)}
-        className="bg-bg-2 border border-border-2 rounded-lg px-3.5 py-2.5 text-sm font-body text-txt outline-none cursor-pointer transition-colors hover:border-accent focus:border-accent w-full"
+        className="bg-bg-2 border border-border-2 rounded-lg px-3 py-2.5 text-sm font-body text-txt outline-none cursor-pointer transition-colors hover:border-accent focus:border-accent w-full"
       >
         <option value="">{placeholder}</option>
         {options.map(o => (
@@ -164,7 +164,7 @@ export function Select({ label, value, onChange, options, placeholder = 'Select�
 // ── SearchInput ────────────────────────────────────────────────────────
 export function SearchInput({ value, onChange, placeholder = 'Search…' }) {
   return (
-    <div className="relative flex-1 min-w-0">
+    <div className="relative w-full">
       <svg className="absolute left-3 top-1/2 -translate-y-1/2 text-txt-3 w-4 h-4" fill="none" stroke="currentColor" strokeWidth={2} viewBox="0 0 24 24">
         <circle cx="11" cy="11" r="8" /><path d="m21 21-4.35-4.35" />
       </svg>
@@ -182,8 +182,9 @@ export function SearchInput({ value, onChange, placeholder = 'Search…' }) {
 export function Table({ columns, data, onRowClick, emptyMessage = 'No data' }) {
   if (!data?.length) return <EmptyState title={emptyMessage} />;
   return (
-    <div className="overflow-x-auto">
-      <table className="w-full border-collapse">
+    // -mx on mobile so table fills card edge-to-edge without outer padding fighting it
+    <div className="overflow-x-auto -mx-0">
+      <table className="w-full border-collapse min-w-[540px]">
         <thead>
           <tr>
             {columns.map(col => (
@@ -209,7 +210,6 @@ export function Table({ columns, data, onRowClick, emptyMessage = 'No data' }) {
                 i % 2 === 1 && 'bg-white/[0.01]',
                 onRowClick ? 'cursor-pointer hover:bg-surface-2' : 'hover:bg-surface-2/50'
               )}
-              style={{ animationDelay: `${i * 0.025}s` }}
             >
               {columns.map(col => (
                 <td
@@ -236,21 +236,25 @@ export function Modal({ open, onClose, title, children, wide }) {
   if (!open) return null;
   return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center p-6 bg-bg/85 backdrop-blur-sm animate-fade-in"
+      className="fixed inset-0 z-50 flex items-end sm:items-center justify-center sm:p-6 bg-bg/85 backdrop-blur-sm animate-fade-in"
       onClick={e => { if (e.target === e.currentTarget) onClose(); }}
     >
       <div className={clsx(
-        'bg-bg-2 border border-border-2 rounded-2xl shadow-2xl w-full animate-fade-up max-h-[90vh] overflow-y-auto',
-        wide ? 'max-w-3xl' : 'max-w-xl'
+        // On mobile: slides up from bottom as a sheet, full width, rounded top
+        // On sm+: centred dialog with max-width
+        'bg-bg-2 border border-border-2 shadow-2xl w-full animate-fade-up overflow-y-auto',
+        'rounded-t-2xl sm:rounded-2xl',
+        'max-h-[92vh] sm:max-h-[90vh]',
+        wide ? 'sm:max-w-3xl' : 'sm:max-w-xl',
       )}>
-        <div className="flex items-center justify-between px-6 py-5 border-b border-border">
-          <h2 className="font-display text-lg font-bold text-txt">{title}</h2>
+        <div className="flex items-center justify-between px-5 sm:px-6 py-4 sm:py-5 border-b border-border sticky top-0 bg-bg-2 z-10">
+          <h2 className="font-display text-base sm:text-lg font-bold text-txt pr-4 leading-snug">{title}</h2>
           <button
             onClick={onClose}
-            className="text-txt-3 hover:text-txt transition-colors text-xl leading-none p-1"
+            className="shrink-0 text-txt-3 hover:text-txt transition-colors text-xl leading-none p-1"
           >✕</button>
         </div>
-        <div className="px-6 py-5">{children}</div>
+        <div className="px-5 sm:px-6 py-4 sm:py-5">{children}</div>
       </div>
     </div>
   );
@@ -259,8 +263,8 @@ export function Modal({ open, onClose, title, children, wide }) {
 // ── SectionHeader ──────────────────────────────────────────────────────
 export function SectionHeader({ title, subtitle }) {
   return (
-    <div className="mb-6">
-      <h2 className="font-display text-2xl font-bold text-txt">{title}</h2>
+    <div className="mb-5 sm:mb-6">
+      <h2 className="font-display text-xl sm:text-2xl font-bold text-txt">{title}</h2>
       {subtitle && <p className="text-txt-2 text-sm mt-0.5">{subtitle}</p>}
     </div>
   );
@@ -269,22 +273,25 @@ export function SectionHeader({ title, subtitle }) {
 // ── Tabs ───────────────────────────────────────────────────────────────
 export function Tabs({ tabs, active, onChange }) {
   return (
-    <div className="flex gap-0.5 bg-bg-2 rounded-lg p-1 w-fit flex-wrap">
-      {tabs.map(tab => (
-        <button
-          key={tab.id}
-          onClick={() => onChange(tab.id)}
-          className={clsx(
-            'px-4 py-2 rounded-md text-sm font-medium transition-all duration-150 whitespace-nowrap',
-            active === tab.id
-              ? 'bg-surface-2 text-txt shadow-sm'
-              : 'text-txt-3 hover:text-txt-2'
-          )}
-        >
-          {tab.icon && <span className="mr-1.5">{tab.icon}</span>}
-          {tab.label}
-        </button>
-      ))}
+    // Full width on mobile, scrollable row so tabs never wrap mid-label
+    <div className="w-full overflow-x-auto pb-0.5">
+      <div className="flex gap-0.5 bg-bg-2 rounded-lg p-1 w-max min-w-full sm:w-fit">
+        {tabs.map(tab => (
+          <button
+            key={tab.id}
+            onClick={() => onChange(tab.id)}
+            className={clsx(
+              'flex-1 sm:flex-none px-3 sm:px-4 py-2 rounded-md text-xs sm:text-sm font-medium transition-all duration-150 whitespace-nowrap',
+              active === tab.id
+                ? 'bg-surface-2 text-txt shadow-sm'
+                : 'text-txt-3 hover:text-txt-2'
+            )}
+          >
+            {tab.icon && <span className="mr-1">{tab.icon}</span>}
+            {tab.label}
+          </button>
+        ))}
+      </div>
     </div>
   );
 }
@@ -292,7 +299,7 @@ export function Tabs({ tabs, active, onChange }) {
 // ── RankBadge ──────────────────────────────────────────────────────────
 export function RankBadge({ rank }) {
   const medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
-  if (medals[rank]) return <span className="text-lg">{medals[rank]}</span>;
+  if (medals[rank]) return <span className="text-base sm:text-lg">{medals[rank]}</span>;
   return (
     <span className="font-mono text-xs text-txt-3 bg-bg-3 rounded px-2 py-0.5">
       #{rank}

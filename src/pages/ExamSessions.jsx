@@ -34,7 +34,7 @@ function SessionDetailModal({ session, onClose }) {
           </div>
 
           {/* Key metrics */}
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard label="Semester" value={data.semester} />
             <StatCard label="SGPA"     value={data.sgpa}     color="accent" />
             <StatCard
@@ -49,7 +49,7 @@ function SessionDetailModal({ session, onClose }) {
           </div>
 
           {/* Meta row */}
-          <div className="grid grid-cols-3 gap-3 text-xs">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 text-xs">
             {[
               ['Exam Session',    data.exam_session],
               ['Avg Grade',       data.average_grade],
@@ -155,7 +155,7 @@ export default function ExamSessions() {
   ];
 
   return (
-    <div className="flex flex-col gap-5 animate-fade-up">
+    <div className="flex flex-col gap-5">
       <SectionHeader title="Exam Sessions" subtitle={`${sessions?.length ?? 0} sessions`} />
 
       {/* Summary KPIs */}
@@ -169,39 +169,35 @@ export default function ExamSessions() {
       )}
 
       {/* Filters */}
-      <div className="flex gap-3 flex-wrap">
-        <div className="w-44">
-          <Select
-            value={semFilter}
-            onChange={setSem}
-            options={(semesters || []).map(s => ({ label: s, value: s }))}
-            placeholder="All Semesters"
-          />
-        </div>
-        <div className="w-52">
-          <Select
-            value={sessionFilter}
-            onChange={setSession}
-            options={(sessionNames || []).map(s => ({ label: s, value: s }))}
-            placeholder="All Sessions"
-          />
-        </div>
-        <div className="w-36">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+        <Select
+          value={semFilter}
+          onChange={setSem}
+          options={(semesters || []).map(s => ({ label: s, value: s }))}
+          placeholder="All Semesters"
+        />
+        <Select
+          value={sessionFilter}
+          onChange={setSession}
+          options={(sessionNames || []).map(s => ({ label: s, value: s }))}
+          placeholder="All Sessions"
+        />
+        <div className="flex gap-3">
           <Select
             value={resultFilter}
             onChange={setResult}
             options={['PASS', 'FAIL']}
             placeholder="All Results"
           />
+          {(semFilter || sessionFilter || resultFilter) && (
+            <button
+              onClick={() => { setSem(''); setSession(''); setResult(''); }}
+              className="shrink-0 px-3 py-2.5 text-xs text-txt-3 border border-border rounded-lg hover:text-txt hover:border-border-2 transition-colors"
+            >
+              Clear
+            </button>
+          )}
         </div>
-        {(semFilter || sessionFilter || resultFilter) && (
-          <button
-            onClick={() => { setSem(''); setSession(''); setResult(''); }}
-            className="px-3 py-2 text-xs text-txt-3 border border-border rounded-lg hover:text-txt hover:border-border-2 transition-colors self-end"
-          >
-            Clear
-          </button>
-        )}
       </div>
 
       <Card className="!p-0">

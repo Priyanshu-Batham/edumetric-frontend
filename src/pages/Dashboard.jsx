@@ -24,39 +24,21 @@ export default function Dashboard() {
   const top5 = (topPerformers || []).slice(0, 5);
 
   return (
-    <div className="flex flex-col gap-7 animate-fade-up">
-      {/* ── CGPA Note ───────────────────────────────────── */}
-      <Card>
-        <div className="flex items-start gap-3">
-          <div className="text-accent text-lg">ℹ️</div>
+    <div className="flex flex-col gap-5 sm:gap-7">
 
-          <div>
-            <p className="font-display font-semibold text-sm text-txt mb-1">
-              Note
-            </p>
-
-            <p className="text-sm text-txt-2 leading-relaxed">
-              CGPA in this platform is calculated as the average of SGPA,
-              not the actual credit based formula.
-            </p>
-          </div>
-        </div>
-      </Card>
-
-      {/* ── KPI row ─────────────────────────────────────── */}
-      <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-4">
-        <StatCard label="Total Students"   value={overview?.totals?.students}        icon="👤" color="accent" />
-        <StatCard label="Exam Sessions"    value={overview?.totals?.exam_sessions}   icon="📋" color="accent-2" />
-        <StatCard label="Subject Results"  value={overview?.totals?.subject_results} icon="📝" color="violet" />
-        <StatCard label="Pass Rate"        value={passRate}                           icon="✅" color="emerald" />
-        <StatCard label="Avg SGPA"         value={overview?.sgpa?.average}           icon="⭐" color="accent" />
-        <StatCard label="Peak SGPA"        value={overview?.sgpa?.highest}           icon="🏆" color="accent" />
+      {/* ── KPI row: 2 cols on mobile → 3 on sm → 6 on xl ── */}
+      <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
+        <StatCard label="Total Students"  value={overview?.totals?.students}        icon="👤" color="accent" />
+        <StatCard label="Exam Sessions"   value={overview?.totals?.exam_sessions}   icon="📋" color="accent-2" />
+        <StatCard label="Subject Results" value={overview?.totals?.subject_results} icon="📝" color="violet" />
+        <StatCard label="Pass Rate"       value={passRate}                           icon="✅" color="emerald" />
+        <StatCard label="Avg SGPA"        value={overview?.sgpa?.average}           icon="⭐" color="accent" />
+        <StatCard label="Peak SGPA"       value={overview?.sgpa?.highest}           icon="🏆" color="accent" />
       </div>
 
-      {/* ── Charts row ──────────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+      {/* ── Charts: 1 col mobile → 3 cols md ── */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-5">
 
-        {/* Pass / Fail donut */}
         <Card>
           <p className="font-display font-semibold text-sm mb-4 text-txt">Pass vs Fail</p>
           <ResponsiveContainer width="100%" height={180}>
@@ -67,12 +49,10 @@ export default function Dashboard() {
                   { name: 'Fail',  value: overview?.pass_fail?.fail  || 0 },
                   { name: 'Other', value: overview?.pass_fail?.other || 0 },
                 ].filter(d => d.value > 0)}
-                cx="50%" cy="50%" innerRadius={50} outerRadius={78}
+                cx="50%" cy="50%" innerRadius={48} outerRadius={74}
                 paddingAngle={3} dataKey="value"
               >
-                <Cell fill="#4caf82" />
-                <Cell fill="#ef5350" />
-                <Cell fill="#5c6480" />
+                <Cell fill="#4caf82" /><Cell fill="#ef5350" /><Cell fill="#5c6480" />
               </Pie>
               <Tooltip {...CHART_TOOLTIP} />
               <Legend formatter={v => <span className="text-txt-2 text-xs">{v}</span>} />
@@ -80,25 +60,23 @@ export default function Dashboard() {
           </ResponsiveContainer>
         </Card>
 
-        {/* SGPA distribution */}
         <Card>
           <p className="font-display font-semibold text-sm mb-4 text-txt">SGPA Distribution</p>
           <ResponsiveContainer width="100%" height={180}>
-            <BarChart data={sgpaDist?.distribution || []} barSize={18}>
-              <XAxis dataKey="range" tick={{ fill: '#5c6480', fontSize: 10, fontFamily: 'DM Mono' }} axisLine={false} tickLine={false} />
-              <YAxis tick={{ fill: '#5c6480', fontSize: 10 }} axisLine={false} tickLine={false} />
+            <BarChart data={sgpaDist?.distribution || []} barSize={16}>
+              <XAxis dataKey="range" tick={{ fill: '#5c6480', fontSize: 9, fontFamily: 'DM Mono' }} axisLine={false} tickLine={false} />
+              <YAxis tick={{ fill: '#5c6480', fontSize: 10 }} axisLine={false} tickLine={false} width={28} />
               <Tooltip {...CHART_TOOLTIP} />
               <Bar dataKey="count" fill="#f0c040" radius={[4, 4, 0, 0]} name="Students" />
             </BarChart>
           </ResponsiveContainer>
         </Card>
 
-        {/* Grade spread */}
         <Card>
           <p className="font-display font-semibold text-sm mb-4 text-txt">Grade Spread</p>
           <ResponsiveContainer width="100%" height={180}>
             <PieChart>
-              <Pie data={gradeData || []} cx="50%" cy="50%" outerRadius={78} paddingAngle={2} dataKey="count" nameKey="grade">
+              <Pie data={gradeData || []} cx="50%" cy="50%" outerRadius={74} paddingAngle={2} dataKey="count" nameKey="grade">
                 {(gradeData || []).map((_, i) => <Cell key={i} fill={CHART_COLORS[i % CHART_COLORS.length]} />)}
               </Pie>
               <Tooltip {...CHART_TOOLTIP} />
@@ -108,10 +86,9 @@ export default function Dashboard() {
         </Card>
       </div>
 
-      {/* ── Bottom row ──────────────────────────────────── */}
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
+      {/* ── Bottom: 1 col mobile → 2 cols md ── */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 sm:gap-5">
 
-        {/* Top 5 performers */}
         <Card>
           <p className="font-display font-semibold text-sm mb-4 text-txt">🏆 Top 5 — All-time CGPA</p>
           <div className="flex flex-col gap-2.5">
@@ -129,7 +106,6 @@ export default function Dashboard() {
           </div>
         </Card>
 
-        {/* Course distribution bars */}
         <Card>
           <p className="font-display font-semibold text-sm mb-4 text-txt">Course Distribution</p>
           <div className="flex flex-col gap-3">
@@ -138,9 +114,9 @@ export default function Dashboard() {
               const pct   = total ? Math.round((c.count / total) * 100) : 0;
               return (
                 <div key={c.course} className="flex flex-col gap-1.5">
-                  <div className="flex justify-between text-xs">
+                  <div className="flex justify-between text-xs gap-2">
                     <span className="text-txt-2 truncate">{c.course}</span>
-                    <span className="font-mono text-txt-3 shrink-0 ml-2">{c.count} ({pct}%)</span>
+                    <span className="font-mono text-txt-3 shrink-0">{c.count} ({pct}%)</span>
                   </div>
                   <div className="h-1 bg-border rounded-full overflow-hidden">
                     <div

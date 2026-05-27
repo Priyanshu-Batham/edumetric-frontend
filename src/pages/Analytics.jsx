@@ -21,7 +21,7 @@ function SemesterTab() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="max-w-xs">
+      <div className="w-full sm:max-w-xs">
         <Select
           label="Select Semester"
           value={selected}
@@ -105,7 +105,7 @@ function SubjectTab() {
 
   return (
     <div className="flex flex-col gap-5">
-      <div className="max-w-sm">
+      <div className="w-full sm:max-w-sm">
         <Select
           label="Select Subject"
           value={selected}
@@ -198,9 +198,9 @@ function CompareTab() {
   return (
     <div className="flex flex-col gap-5">
       {/* Selector row */}
-      <div className="flex flex-wrap gap-3 items-end">
+      <div className="flex flex-col sm:flex-row flex-wrap gap-3 sm:items-end">
         {ids.map((id, i) => (
-          <div key={i} className="w-60">
+          <div key={i} className="w-full sm:w-60">
             <Select
               label={`Student ${i + 1}`}
               value={id}
@@ -210,30 +210,32 @@ function CompareTab() {
             />
           </div>
         ))}
-        <button
-          onClick={() => setIds(prev => [...prev, ''])}
-          className="px-3 py-2.5 bg-surface-2 border border-border rounded-lg text-txt-2 hover:border-accent hover:text-accent transition-colors text-sm"
-        >
-          + Add
-        </button>
-        <button
-          onClick={doCompare}
-          disabled={loading || ids.filter(Boolean).length < 2}
-          className="px-5 py-2.5 bg-accent text-bg font-semibold rounded-lg text-sm hover:bg-accent/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
-        >
-          {loading ? 'Comparing…' : 'Compare →'}
-        </button>
+        <div className="flex gap-2 sm:items-end">
+          <button
+            onClick={() => setIds(prev => [...prev, ''])}
+            className="flex-1 sm:flex-none px-3 py-2.5 bg-surface-2 border border-border rounded-lg text-txt-2 hover:border-accent hover:text-accent transition-colors text-sm"
+          >
+            + Add
+          </button>
+          <button
+            onClick={doCompare}
+            disabled={loading || ids.filter(Boolean).length < 2}
+            className="flex-1 sm:flex-none px-5 py-2.5 bg-accent text-bg font-semibold rounded-lg text-sm hover:bg-accent/90 transition-colors disabled:opacity-40 disabled:cursor-not-allowed"
+          >
+            {loading ? 'Comparing…' : 'Compare →'}
+          </button>
+        </div>
       </div>
 
       {/* Result cards */}
       {result && (
         <>
-          <div className="flex flex-wrap gap-4">
+          <div className="grid grid-cols-2 sm:flex sm:flex-wrap gap-3 sm:gap-4">
             {result.map((r, i) => (
-              <div key={r.student_id} className="flex-1 min-w-[160px] bg-surface border border-border rounded-xl p-4">
-                <div className="font-display font-bold text-base text-txt">{r.name}</div>
-                <div className="font-mono text-[10px] text-txt-3 mb-3">{r.enrollment_no}</div>
-                <div className="font-display font-extrabold text-3xl" style={{ color: CHART_COLORS[i] }}>
+              <div key={r.student_id} className="sm:flex-1 sm:min-w-[150px] bg-surface border border-border rounded-xl p-4">
+                <div className="font-display font-bold text-sm sm:text-base text-txt truncate">{r.name}</div>
+                <div className="font-mono text-[10px] text-txt-3 mb-3 truncate">{r.enrollment_no}</div>
+                <div className="font-display font-extrabold text-2xl sm:text-3xl" style={{ color: CHART_COLORS[i] }}>
                   {r.cgpa ?? '—'}
                 </div>
                 <div className="text-[10px] text-txt-3 mt-0.5">CGPA · {r.semester_data?.length} sems</div>
@@ -346,7 +348,7 @@ export default function Analytics() {
   ];
 
   return (
-    <div className="flex flex-col gap-6 animate-fade-up">
+    <div className="flex flex-col gap-6">
       <SectionHeader title="Analytics" subtitle="Deep dive into exam performance data" />
       <Tabs tabs={tabs} active={tab} onChange={setTab} />
       <div>

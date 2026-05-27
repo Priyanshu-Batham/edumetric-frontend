@@ -21,7 +21,7 @@ function SubjectStatsModal({ subject, onClose }) {
         <div className="flex flex-col gap-5">
 
           {/* Stats row */}
-          <div className="grid grid-cols-4 gap-3">
+          <div className="grid grid-cols-2 sm:grid-cols-4 gap-3">
             <StatCard label="Students" value={data.total_students} />
             <StatCard label="Avg Marks" value={data.marks_stats?.average} color="accent" />
             <StatCard label="Highest"   value={data.marks_stats?.highest} color="emerald" />
@@ -108,7 +108,7 @@ export default function Subjects() {
   ];
 
   return (
-    <div className="flex flex-col gap-5 animate-fade-up">
+    <div className="flex flex-col gap-5">
       <SectionHeader title="Subjects" subtitle={`${subjects?.length ?? 0} subjects`} />
 
       <div className="max-w-sm">
