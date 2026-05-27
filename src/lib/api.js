@@ -1,4 +1,4 @@
-const BASE = '/api/v1';
+const BASE = import.meta.env.VITE_API_BASE_URL;
 
 async function req(path, options = {}) {
   const res = await fetch(`${BASE}${path}`, {
@@ -77,7 +77,7 @@ export const rankingsApi = {
   bySemester: (semester, params = {}) => req(`/rankings/semester/${encodeURIComponent(semester)}?` + new URLSearchParams(params)),
   bySubject: (id, params = {}) => req(`/rankings/subject/${id}?` + new URLSearchParams(params)),
   byCourse: (course, params = {}) => req(`/rankings/course/${encodeURIComponent(course)}?` + new URLSearchParams(params)),
-  overall: (params = {}) => req('/rankings/overall?' + new URLSearchParams(params)),
+  ovaprall: (params = {}) => req('/rankings/overall?' + new URLSearchParams(params)),
   studentRank: (id, semester, params = {}) => req(`/rankings/student/${id}/rank?semester=${encodeURIComponent(semester)}&` + new URLSearchParams(params)),
   studentPercentile: (id, semester) => req(`/rankings/student/${id}/percentile?semester=${encodeURIComponent(semester)}`),
 };
