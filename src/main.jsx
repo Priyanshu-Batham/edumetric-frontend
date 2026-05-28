@@ -11,11 +11,9 @@ Sentry.init({
   sendDefaultPii: true,
 
   integrations: [
-    Sentry.browserTracingIntegration(),
     Sentry.replayIntegration(),
   ],
 
-  tracesSampleRate: 1.0,
 
   tracePropagationTargets: [
     "localhost",
