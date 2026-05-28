@@ -33,6 +33,20 @@ export default function Dashboard() {
         </p>
       </div>
 
+      <div className="rounded-xl border border-red-500/20 bg-red-500/10 px-4 py-3">
+        <p className="text-sm text-red-200 leading-relaxed">
+          🛑 Data is not updated after December 2025! For more info contact the {" "}
+
+          <a
+            href="https://www.linkedin.com/in/priyanshu-batham/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline hover:text-blue-100 transition"
+          >
+            Dev
+          </a>
+        </p>
+      </div>
       {/* ── KPI row: 2 cols on mobile → 3 on sm → 6 on xl ── */}
       <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
         <StatCard label="Total Students"  value={overview?.totals?.students}        icon="👤" color="accent" />
