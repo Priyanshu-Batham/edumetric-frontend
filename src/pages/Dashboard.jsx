@@ -25,6 +25,13 @@ export default function Dashboard() {
 
   return (
     <div className="flex flex-col gap-5 sm:gap-7">
+      {/* ── CGPA Note ── */}
+      <div className="rounded-xl border border-yellow-500/20 bg-yellow-500/10 px-4 py-3">
+        <p className="text-sm text-yellow-200 leading-relaxed">
+          ⚠️ The CGPA on this platform is calculated as the average SGPAs of available semesters
+          and not using the official credit-based formula of NPGC.
+        </p>
+      </div>
 
       {/* ── KPI row: 2 cols on mobile → 3 on sm → 6 on xl ── */}
       <div className="grid grid-cols-2 sm:grid-cols-3 xl:grid-cols-6 gap-3 sm:gap-4">
