@@ -4,7 +4,7 @@
 
 ### ⚠️ No longer being hosted due to server costs.
 
-For more Screenshots, goto screenshots dir of this project.
+For more Screenshots, goto [screenshots dir](./screenshots) of this project.
 
 ## 🚀 Quick Start
 
