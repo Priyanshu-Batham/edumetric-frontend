@@ -1,10 +1,10 @@
-# 🎨 EduMetrics — Exam Analytics Frontend For [National Post Graduate College](https://www.npgc.in/)
+#  EduMetrics — Exam Analytics Frontend For [National Post Graduate College](https://www.npgc.in/)
 
 <img width="1710" height="995" alt="Screenshot 2026-05-31 at 10 32 12 AM" src="https://github.com/user-attachments/assets/8e9af199-005d-48ef-947c-3726a592377b" />
 
 ### ⚠️ No longer being hosted due to server costs.
-
-For more Screenshots, goto [screenshots dir](./screenshots) of this project.
+### ❕Backend is available in a seperate [Repository](https://github.com/Priyanshu-Batham/edumetric-backend/blob/master/README.md)
+### ❕For more Screenshots, goto [screenshots dir](./screenshots) of this project.
 
 ## 🚀 Quick Start
 
